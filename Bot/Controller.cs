@@ -1427,7 +1427,7 @@ namespace Bot
                 }
 
                 CallLogEvent(m_Town.TownName + ": Adding " + l_Building + " to ingame queue.");
-
+                m_Town.BotBuildingQueue.RemoveAt(0);
                 var l_Url = "https://" + Settings.GrepolisWorldServer + "/game/frontend_bridge?town_id=" +
                             m_CurrentTownID +
                             "&action=execute&h=" + H;
