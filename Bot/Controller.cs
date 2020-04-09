@@ -1396,6 +1396,10 @@ namespace Bot
                             {
                                 l_Building = l_NextBuilding;
                             }
+                            else
+                            {
+                                CallLogEvent(m_Town.TownName + " : " + l_NextBuilding + " can not be upgraded. Maybe you do not have enough resources.");
+                            }
                         }
                     }
                 }
