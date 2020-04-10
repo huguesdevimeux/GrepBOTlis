@@ -141,6 +141,7 @@
             this.BotNumericUpDown_ColonizeShip = new System.Windows.Forms.NumericUpDown();
             this.BotNumericUpDown_SeaMonster = new System.Windows.Forms.NumericUpDown();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.Label_TownPriority = new System.Windows.Forms.Label();
             this.BotNumericUpDown_TownPriority = new System.Windows.Forms.NumericUpDown();
             this.BotCheckBox_BuildingDowngrade = new System.Windows.Forms.CheckBox();
             this.numericUpDownMilitiaTrigger = new System.Windows.Forms.NumericUpDown();
@@ -430,7 +431,7 @@
             this.BotTextBox_MainServer = new System.Windows.Forms.TextBox();
             this.BotLbl_World = new System.Windows.Forms.Label();
             this.BotTextBox_World = new System.Windows.Forms.TextBox();
-            this.Label_TownPriority = new System.Windows.Forms.Label();
+            this.BotButton_refreshQueues = new System.Windows.Forms.Button();
             this.BotTabControl.SuspendLayout();
             this.BotTabPage_Overview.SuspendLayout();
             this.BotGroupBox_Status.SuspendLayout();
@@ -802,6 +803,7 @@
             // 
             // BotTabPage_Queues
             // 
+            this.BotTabPage_Queues.Controls.Add(this.BotButton_refreshQueues);
             this.BotTabPage_Queues.Controls.Add(this.BotGroupBox_UnitQueue);
             this.BotTabPage_Queues.Controls.Add(this.groupBox12);
             this.BotTabPage_Queues.Controls.Add(this.BotGroupBox_TownSelectQueue);
@@ -2090,6 +2092,15 @@
             this.groupBox12.TabIndex = 63;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Config";
+            // 
+            // Label_TownPriority
+            // 
+            this.Label_TownPriority.AutoSize = true;
+            this.Label_TownPriority.Location = new System.Drawing.Point(3, 168);
+            this.Label_TownPriority.Name = "Label_TownPriority";
+            this.Label_TownPriority.Size = new System.Drawing.Size(68, 13);
+            this.Label_TownPriority.TabIndex = 140;
+            this.Label_TownPriority.Text = "Town Priority";
             // 
             // BotNumericUpDown_TownPriority
             // 
@@ -6014,14 +6025,16 @@
             this.BotTextBox_World.TabIndex = 3;
             this.BotTextBox_World.Text = "en1";
             // 
-            // Label_TownPriority
+            // BotButton_refreshQueues
             // 
-            this.Label_TownPriority.AutoSize = true;
-            this.Label_TownPriority.Location = new System.Drawing.Point(3, 168);
-            this.Label_TownPriority.Name = "Label_TownPriority";
-            this.Label_TownPriority.Size = new System.Drawing.Size(68, 13);
-            this.Label_TownPriority.TabIndex = 140;
-            this.Label_TownPriority.Text = "Town Priority";
+            this.BotButton_refreshQueues.Enabled = false;
+            this.BotButton_refreshQueues.Location = new System.Drawing.Point(969, 685);
+            this.BotButton_refreshQueues.Name = "BotButton_refreshQueues";
+            this.BotButton_refreshQueues.Size = new System.Drawing.Size(75, 23);
+            this.BotButton_refreshQueues.TabIndex = 65;
+            this.BotButton_refreshQueues.Text = "Refresh";
+            this.BotButton_refreshQueues.UseVisualStyleBackColor = true;
+            this.BotButton_refreshQueues.Click += new System.EventHandler(this.BotButton_refreshQueues_Click);
             // 
             // MainForm
             // 
@@ -6581,5 +6594,6 @@
         private System.Windows.Forms.Label BotLabel_SkipUnitQueuePop;
         private System.Windows.Forms.NumericUpDown BotNumericUpDown_SkipUnitQueuePop;
         private System.Windows.Forms.Label Label_TownPriority;
+        private System.Windows.Forms.Button BotButton_refreshQueues;
     }
 }

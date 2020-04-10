@@ -1294,7 +1294,7 @@ namespace Bot
                 //Building for town enabled?
                 if (!m_Town.BuildingQueueEnabled)
                 {
-                    CallLogEvent(m_Town.TownName + ": Building queue is disabled.");
+                    CallLogEvent(m_Town.TownName + ": [BUILD] Building queue is disabled.");
                     m_ControllerQueue.RemoveFirst();
                     m_RequestTimer.Start();
                     return;
@@ -1321,24 +1321,36 @@ namespace Bot
                     if (m_Town.BuildingTargetEnabled && (!Settings.AdvancedQueue || m_Town.BotBuildingQueue.Count == 0))
                     {
                         //Automatic mode activad
+                        CallLogEvent(m_Town.TownName + ": [BUILD] Building target mode enabled");
                         var l_LowestLevel = 50;
                         var l_HighestLevel = 0;
                         int l_Level;
                         Buildings l_BuildingTemp;
                         foreach (var building in m_Town.Buildings)
                         {
-                            l_BuildingTemp = building.DevName;
-                            l_Level = building.Level + 1;
-
-                            if (building.Upgradable)
+                            if (building.TargetLevel > 0)
                             {
-                                if (l_Level <= building.TargetLevel)
+                                l_BuildingTemp = building.DevName;
+                                l_Level = building.Level + 1;
+
+                                if (building.Upgradable)
                                 {
-                                    if (l_Level < l_LowestLevel)
+                                    if (l_Level <= building.TargetLevel)
                                     {
-                                        l_Building = l_BuildingTemp;
-                                        l_LowestLevel = l_Level;
+                                        if (l_Level < l_LowestLevel)
+                                        {
+                                            l_Building = l_BuildingTemp;
+                                            l_LowestLevel = l_Level;
+                                        }
                                     }
+                                    else
+                                    {
+                                        CallLogEvent(m_Town.TownName + ": [BUILD] " + l_BuildingTemp + " is already at the desired level.");
+                                    }
+                                }
+                                else
+                                {
+                                    CallLogEvent(m_Town.TownName + ": [BUILD] " + l_BuildingTemp + " can not be upgraded. Maybe you do not have enough resources.");
                                 }
                             }
                         }
@@ -1371,6 +1383,7 @@ namespace Bot
                     //else use queue
                     else
                     {
+                        CallLogEvent(m_Town.TownName + ": [BUILD] Normal mode activated.");
                         //Normal mode activated
                         if (m_Town.BotBuildingQueue.Count > 0)
                         {
@@ -1387,6 +1400,10 @@ namespace Bot
                                     break;
                             }
                         }
+                        else
+                        {
+                            CallLogEvent(m_Town.TownName + ": [BUILD] Building queue is empty!");
+                        }
 
                         if (m_Town.BotBuildingQueue.Count > 0)
                         {
@@ -1398,7 +1415,7 @@ namespace Bot
                             }
                             else
                             {
-                                CallLogEvent(m_Town.TownName + " : " + l_NextBuilding + " can not be upgraded. Maybe you do not have enough resources.");
+                                CallLogEvent(m_Town.TownName + ": [BUILD] " + l_NextBuilding + " can not be upgraded. Maybe you do not have enough resources.");
                             }
                         }
                     }
@@ -1406,7 +1423,7 @@ namespace Bot
 
                 if (l_Building == null && l_Teardown == null)
                 {
-                    CallLogEvent(m_Town.TownName + ": Nothing to build.");
+                    CallLogEvent(m_Town.TownName + ": [BUILD] Nothing to build.");
                     m_ControllerQueue.RemoveFirst();
                     m_RequestTimer.Start();
                     return;
@@ -1415,7 +1432,7 @@ namespace Bot
                 //Adding different controller state to queue for teardown.
                 if (l_Teardown != null)
                 {
-                    CallLogEvent(m_Town.TownName + ": Demolishing " + l_Teardown + " .");
+                    CallLogEvent(m_Town.TownName + ": [BUILD] Demolishing " + l_Teardown + " .");
                     m_ControllerQueue.RemoveFirst();
                     m_ControllerQueue.AddFirst(ControllerStates.CheckBuildingQueueTeardown);
                     m_ControllerQueueDataQueue.AddFirst(new Dictionary<string, string>()
@@ -1426,8 +1443,8 @@ namespace Bot
                     return;
                 }
 
-                CallLogEvent(m_Town.TownName + ": Adding " + l_Building + " to ingame queue.");
-                m_Town.BotBuildingQueue.RemoveAt(0);
+                CallLogEvent(m_Town.TownName + ": [BUILD] Adding " + l_Building + " to ingame queue.");
+
                 var l_Url = "https://" + Settings.GrepolisWorldServer + "/game/frontend_bridge?town_id=" +
                             m_CurrentTownID +
                             "&action=execute&h=" + H;
@@ -1447,6 +1464,52 @@ namespace Bot
             }
         }
 
+        /// <summary>
+        /// Handle the server response for CheckBuildingQueueRequest().
+        /// </summary>
+        private void CheckBuildingQueueResponse(string p_Response)
+        {
+            try
+            {
+                //Only remove from botbuildingqueue if not in target mode or advanced queue
+                if (!m_Town.BuildingTargetEnabled && m_Town.BotBuildingQueue.Count > 0)
+                {
+                    m_Town.BotBuildingQueue.RemoveAt(0);
+                }
+                else if (m_Town.BuildingTargetEnabled && Settings.AdvancedQueue && m_Town.BotBuildingQueue.Count > 0)
+                {
+                    m_Town.BotBuildingQueue.RemoveAt(0);
+                }
+
+                UpdateTownDataFromNotification(p_Response);
+
+                var l_Search = "\\\"building_type\\\":\\\"";
+                var l_Index = p_Response.IndexOf(l_Search, StringComparison.Ordinal);
+
+                var l_BuildingName = p_Response.Substring(l_Index + l_Search.Length,
+                        p_Response.IndexOf("\\\",", l_Index + l_Search.Length, StringComparison.Ordinal) -
+                        (l_Index + l_Search.Length));
+                var l_BuildingEnum = (Buildings)Enum.Parse(typeof(Buildings), l_BuildingName);
+
+                l_Search = "\\\"to_be_completed_at\\\":";
+                l_Index = p_Response.IndexOf(l_Search, l_Index, StringComparison.Ordinal);
+                var l_CompletedAt = p_Response.Substring(l_Index + l_Search.Length,
+                        p_Response.IndexOf(",", l_Index + l_Search.Length, StringComparison.Ordinal) -
+                        (l_Index + l_Search.Length));
+
+                l_Search = "\\\"created_at\\\":";
+                l_Index = p_Response.IndexOf(l_Search, l_Index, StringComparison.Ordinal);
+                var l_CreatedAt = p_Response.Substring(l_Index + l_Search.Length,
+                        p_Response.IndexOf(",", l_Index + l_Search.Length, StringComparison.Ordinal) -
+                        (l_Index + l_Search.Length));
+
+                m_Town.IngameBuildingQueue.Add(new BuildingQueueBuilding(l_BuildingEnum, l_CreatedAt, l_CompletedAt));
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteExceptionToLog(ex.Message);
+            }
+        }
         /// <summary>
         /// Teardown a building.
         /// </summary>
@@ -3890,7 +3953,7 @@ namespace Bot
                         (l_Index + l_Search.Length)).Equals("true");
 
                 //Remove all finished building queue items.
-                m_Town.IngameBuildingQueue.RemoveAll(x => Parser.UnixToHumanTime(x.CompletedAt) < DateTime.Now);
+                m_Town.IngameBuildingQueue.RemoveAll(x => (Parser.UnixToHumanTime(x.CompletedAt) < DateTime.UtcNow && int.Parse(x.CompletedAt) != 0));
 
                 if (m_Town.IsBuildingOrderQueueFull)
                 {
@@ -3906,52 +3969,6 @@ namespace Bot
             }
         }
 
-        /// <summary>
-        /// Handle the server response for CheckBuildingQueueRequest().
-        /// </summary>
-        private void CheckBuildingQueueResponse(string p_Response)
-        {
-            try
-            {
-                //Only remove vom botbuildingqueue if not in target mode or advanced queue
-                if (!m_Town.BuildingTargetEnabled && m_Town.BotBuildingQueue.Count > 0)
-                {
-                    m_Town.BotBuildingQueue.RemoveAt(0);
-                }
-                else if (m_Town.BuildingTargetEnabled && Settings.AdvancedQueue && m_Town.BotBuildingQueue.Count > 0)
-                {
-                    m_Town.BotBuildingQueue.RemoveAt(0);
-                }
-
-                UpdateTownDataFromNotification(p_Response);
-
-                var l_Search = "\\\"building_type\\\":\\\"";
-                var l_Index = p_Response.IndexOf(l_Search, StringComparison.Ordinal);
-
-                var l_BuildingName = p_Response.Substring(l_Index + l_Search.Length,
-                        p_Response.IndexOf("\\\",", l_Index + l_Search.Length, StringComparison.Ordinal) -
-                        (l_Index + l_Search.Length));
-                var l_BuildingEnum = (Buildings)Enum.Parse(typeof(Buildings), l_BuildingName);
-
-                l_Search = "\\\"to_be_completed_at\\\":";
-                l_Index = p_Response.IndexOf(l_Search, l_Index, StringComparison.Ordinal);
-                var l_CompletedAt = p_Response.Substring(l_Index + l_Search.Length,
-                        p_Response.IndexOf(",", l_Index + l_Search.Length, StringComparison.Ordinal) -
-                        (l_Index + l_Search.Length));
-
-                l_Search = "\\\"created_at\\\":";
-                l_Index = p_Response.IndexOf(l_Search, l_Index, StringComparison.Ordinal);
-                var l_CreatedAt = p_Response.Substring(l_Index + l_Search.Length,
-                        p_Response.IndexOf(",", l_Index + l_Search.Length, StringComparison.Ordinal) -
-                        (l_Index + l_Search.Length));
-
-                m_Town.IngameBuildingQueue.Add(new BuildingQueueBuilding(l_BuildingEnum, l_CreatedAt, l_CompletedAt));
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteExceptionToLog(ex.Message);
-            }
-        }
 
         /// <summary>
         /// Response for CheckBuildingQueueTeardownRequest().
@@ -3983,6 +4000,8 @@ namespace Bot
                     (l_Index + l_Search.Length));
 
                 m_Town.IngameBuildingQueue.Add(new BuildingQueueBuilding(l_BuildingEnum, l_CreatedAt, l_CompletedAt));
+
+                //updateQueue
             }
             catch (Exception ex)
             {

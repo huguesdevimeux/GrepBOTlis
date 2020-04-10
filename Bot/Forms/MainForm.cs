@@ -620,7 +620,7 @@ namespace Bot.Forms
         /// <summary>
         /// Update the Queue GUI.
         /// </summary>
-        private void UpdateQueueGUI()
+        public void UpdateQueueGUI()
         {
             try
             {
@@ -654,6 +654,7 @@ namespace Bot.Forms
                 BotCheckBox_UnitQueueEnabled.Enabled = true;
                 BotNumericUpDown_TownPriority.Enabled = true;
                 BotButton_SaveQueue.Enabled = true;
+                BotButton_refreshQueues.Enabled = true;
 
                 for (var i = 0; i < l_Town.Buildings.Count; i++)
                 {
@@ -711,6 +712,7 @@ namespace Bot.Forms
                             ? Color.Red
                             : Color.Black;
                 }
+                
             }
             catch (Exception ex)
             {
@@ -1336,7 +1338,12 @@ namespace Bot.Forms
         /// <summary>
         /// Save settings.
         /// </summary>
+        /// 
         private void BotButton_SaveQueue_Click(object sender, EventArgs e)
+        {
+            SaveQueues();
+        }
+        private void SaveQueues()
         {
             try
             {
@@ -1349,6 +1356,7 @@ namespace Bot.Forms
                 l_Town.UnitQueueEnabled = BotCheckBox_UnitQueueEnabled.Checked;
                 l_Town.Priority = int.Parse(BotNumericUpDown_TownPriority.Text);
 
+                
                 //fill bot building queue
                 for (var i = 0; i < m_BotQueueSize; i++)
                 {
@@ -1358,7 +1366,7 @@ namespace Bot.Forms
                                 ((Label)BotFlowLayoutPanel_QueueBot.Controls[i]).Tag.ToString());
                     l_Town.BotBuildingQueue.Add(l_BuildingEnum);
                 }
-
+                
                 //Set target levels
                 for (var i = 0; i < l_Town.Buildings.Count; i++)
                 {
@@ -1403,6 +1411,23 @@ namespace Bot.Forms
             {
                 Logger.WriteExceptionToLog(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Single click on refresh button to refresh the queues. 
+        /// </summary>
+        private void BotButton_refreshQueues_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateQueueGUI();
+                //SaveQueues();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteExceptionToLog(ex.Message);
+            }
+
         }
 
         /// <summary>
@@ -2248,6 +2273,7 @@ namespace Bot.Forms
         }
 
         #endregion Cross Threads
+
 
     }
 }
