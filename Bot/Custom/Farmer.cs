@@ -87,6 +87,20 @@ namespace Bot.Custom
         /// </summary>
         public bool Enabled { get; set; } = false;
 
+        ///<summary> 
+        ///Should the bot get resources from the farm. Activted by default. 
+        /// </summary>
+        public bool ResourcesEnabled { get; set; } = true; 
+
+        /// <summary> 
+        /// Should the bot get units from the farm. 
+        /// </summary>
+        public bool UnitsEnabled { get; set; } = false;
+
+        /// <summary> 
+        /// Type of units that are claimed. Default value 0.
+        /// </summary>
+        public string TypeUnits { get; set; } = "";
         /// <summary>
         /// Limit to farm.
         /// </summary>

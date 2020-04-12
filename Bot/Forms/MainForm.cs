@@ -512,6 +512,37 @@ namespace Bot.Forms
                     BotCheckBox_Village5.Enabled = true;
                     BotCheckBox_Village6.Enabled = true;
 
+                    //enable grupboc units 
+                    GroupBox_typeresourceVillage1.Enabled = true;
+                    GroupBox_typeresourceVillage2.Enabled = true;
+                    GroupBox_typeresourceVillage3.Enabled = true;
+                    GroupBox_typeresourceVillage4.Enabled = true;
+                    GroupBox_typeresourceVillage5.Enabled = true;
+                    GroupBox_typeresourceVillage6.Enabled = true;
+                    //Village Resources enabled 
+                    BotCheckBox_ResourcesEnabledVillage1.Checked = l_Town.Farmers[0].ResourcesEnabled;
+                    BotCheckBox_ResourcesEnabledVillage2.Checked = l_Town.Farmers[1].ResourcesEnabled;
+                    BotCheckBox_ResourcesEnabledVillage3.Checked = l_Town.Farmers[2].ResourcesEnabled;
+                    BotCheckBox_ResourcesEnabledVillage4.Checked = l_Town.Farmers[3].ResourcesEnabled;
+                    BotCheckBox_ResourcesEnabledVillage5.Checked = l_Town.Farmers[4].ResourcesEnabled;
+                    BotCheckBox_ResourcesEnabledVillage6.Checked = l_Town.Farmers[5].ResourcesEnabled;
+
+                    //Village Units claim enabled
+                    BotCheckBox_UnitsEnabledVillage1.Checked = l_Town.Farmers[0].UnitsEnabled;
+                    BotCheckBox_UnitsEnabledVillage2.Checked = l_Town.Farmers[1].UnitsEnabled;
+                    BotCheckBox_UnitsEnabledVillage3.Checked = l_Town.Farmers[2].UnitsEnabled;
+                    BotCheckBox_UnitsEnabledVillage4.Checked = l_Town.Farmers[3].UnitsEnabled;
+                    BotCheckBox_UnitsEnabledVillage5.Checked = l_Town.Farmers[4].UnitsEnabled;
+                    BotCheckBox_UnitsEnabledVillage6.Checked = l_Town.Farmers[5].UnitsEnabled;
+
+                    //enable type units
+                    BotComboBox_TypeUnitsVillage1.Enabled = true;
+                    BotComboBox_TypeUnitsVillage2.Enabled = true;
+                    BotComboBox_TypeUnitsVillage3.Enabled = true;
+                    BotComboBox_TypeUnitsVillage4.Enabled = true;
+                    BotComboBox_TypeUnitsVillage5.Enabled = true;
+                    BotComboBox_TypeUnitsVillage6.Enabled = true;
+
                     //enable check box
                     BotCheckBox_FarmersLootEnabled.Enabled = true;
 
@@ -620,7 +651,7 @@ namespace Bot.Forms
         /// <summary>
         /// Update the Queue GUI.
         /// </summary>
-        public void UpdateQueueGUI()
+        private void UpdateQueueGUI()
         {
             try
             {
@@ -1065,6 +1096,29 @@ namespace Bot.Forms
                 l_Town.Farmers[3].Enabled = BotCheckBox_Village4.Checked;
                 l_Town.Farmers[4].Enabled = BotCheckBox_Village5.Checked;
                 l_Town.Farmers[5].Enabled = BotCheckBox_Village6.Checked;
+
+                //Loot type
+                l_Town.Farmers[1].ResourcesEnabled = BotCheckBox_ResourcesEnabledVillage1.Checked;
+                l_Town.Farmers[2].ResourcesEnabled = BotCheckBox_ResourcesEnabledVillage2.Checked;
+                l_Town.Farmers[3].ResourcesEnabled = BotCheckBox_ResourcesEnabledVillage3.Checked;
+                l_Town.Farmers[4].ResourcesEnabled = BotCheckBox_ResourcesEnabledVillage4.Checked;
+                l_Town.Farmers[5].ResourcesEnabled = BotCheckBox_ResourcesEnabledVillage5.Checked;
+                l_Town.Farmers[6].ResourcesEnabled = BotCheckBox_ResourcesEnabledVillage6.Checked;
+
+                l_Town.Farmers[1].UnitsEnabled = BotCheckBox_UnitsEnabledVillage1.Checked;
+                l_Town.Farmers[2].UnitsEnabled = BotCheckBox_UnitsEnabledVillage2.Checked;
+                l_Town.Farmers[3].UnitsEnabled = BotCheckBox_UnitsEnabledVillage3.Checked;
+                l_Town.Farmers[4].UnitsEnabled = BotCheckBox_UnitsEnabledVillage4.Checked;
+                l_Town.Farmers[5].UnitsEnabled = BotCheckBox_UnitsEnabledVillage5.Checked;
+                l_Town.Farmers[6].UnitsEnabled = BotCheckBox_UnitsEnabledVillage6.Checked;
+
+                //Unit type
+                l_Town.Farmers[0].TypeUnits = BotComboBox_TypeUnitsVillage1.Text;
+                l_Town.Farmers[1].TypeUnits = BotComboBox_TypeUnitsVillage2.Text;
+                l_Town.Farmers[2].TypeUnits = BotComboBox_TypeUnitsVillage3.Text;
+                l_Town.Farmers[3].TypeUnits = BotComboBox_TypeUnitsVillage4.Text;
+                l_Town.Farmers[4].TypeUnits = BotComboBox_TypeUnitsVillage5.Text;
+                l_Town.Farmers[5].TypeUnits = BotComboBox_TypeUnitsVillage6.Text; 
 
                 IOHelper.SaveTownSettingsToXml(m_Controller.Player.Towns);
             }
@@ -2272,8 +2326,12 @@ namespace Bot.Forms
             }
         }
 
+
         #endregion Cross Threads
 
+        private void GroupBox1_Enter(object sender, EventArgs e)
+        {
 
+        }
     }
 }

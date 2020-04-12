@@ -15,6 +15,7 @@
         OpenFarmerWindow,
         GetTownSpecificData,
         LootFarmer,
+        UnitsFarmer,
         CheckTrade,
         SendResources,
         UpdateCulturalInfo,

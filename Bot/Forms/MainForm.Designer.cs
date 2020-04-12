@@ -54,6 +54,7 @@
             this.BotBtn_Start = new System.Windows.Forms.Button();
             this.BotBtn_Login = new System.Windows.Forms.Button();
             this.BotTabPage_Queues = new System.Windows.Forms.TabPage();
+            this.BotButton_refreshQueues = new System.Windows.Forms.Button();
             this.BotGroupBox_UnitQueue = new System.Windows.Forms.GroupBox();
             this.BotFlowLayoutPanel_Units = new System.Windows.Forms.FlowLayoutPanel();
             this.BotFlowLayoutPanel_UnitsImg = new System.Windows.Forms.FlowLayoutPanel();
@@ -283,6 +284,24 @@
             this.BotButton_SaveFarmers = new System.Windows.Forms.Button();
             this.BotCheckBox_FarmersLootEnabled = new System.Windows.Forms.CheckBox();
             this.BotGroupBox_Villages = new System.Windows.Forms.GroupBox();
+            this.GroupBox_typeresourceVillage6 = new System.Windows.Forms.GroupBox();
+            this.BotCheckBox_UnitsEnabledVillage6 = new System.Windows.Forms.RadioButton();
+            this.BotCheckBox_ResourcesEnabledVillage6 = new System.Windows.Forms.RadioButton();
+            this.GroupBox_typeresourceVillage5 = new System.Windows.Forms.GroupBox();
+            this.BotCheckBox_UnitsEnabledVillage5 = new System.Windows.Forms.RadioButton();
+            this.BotCheckBox_ResourcesEnabledVillage5 = new System.Windows.Forms.RadioButton();
+            this.GroupBox_typeresourceVillage4 = new System.Windows.Forms.GroupBox();
+            this.BotCheckBox_UnitsEnabledVillage4 = new System.Windows.Forms.RadioButton();
+            this.BotCheckBox_ResourcesEnabledVillage4 = new System.Windows.Forms.RadioButton();
+            this.GroupBox_typeresourceVillage3 = new System.Windows.Forms.GroupBox();
+            this.BotCheckBox_UnitsEnabledVillage3 = new System.Windows.Forms.RadioButton();
+            this.BotCheckBox_ResourcesEnabledVillage3 = new System.Windows.Forms.RadioButton();
+            this.GroupBox_typeresourceVillage2 = new System.Windows.Forms.GroupBox();
+            this.BotCheckBox_UnitsEnabledVillage2 = new System.Windows.Forms.RadioButton();
+            this.BotCheckBox_ResourcesEnabledVillage2 = new System.Windows.Forms.RadioButton();
+            this.GroupBox_typeresourceVillage1 = new System.Windows.Forms.GroupBox();
+            this.BotCheckBox_UnitsEnabledVillage1 = new System.Windows.Forms.RadioButton();
+            this.BotCheckBox_ResourcesEnabledVillage1 = new System.Windows.Forms.RadioButton();
             this.BotLabel_TimerVillage3 = new System.Windows.Forms.Label();
             this.BotLabel_TimerVillage4 = new System.Windows.Forms.Label();
             this.BotLabel_TimerVillage5 = new System.Windows.Forms.Label();
@@ -431,7 +450,12 @@
             this.BotTextBox_MainServer = new System.Windows.Forms.TextBox();
             this.BotLbl_World = new System.Windows.Forms.Label();
             this.BotTextBox_World = new System.Windows.Forms.TextBox();
-            this.BotButton_refreshQueues = new System.Windows.Forms.Button();
+            this.BotComboBox_TypeUnitsVillage1 = new System.Windows.Forms.ComboBox();
+            this.BotComboBox_TypeUnitsVillage2 = new System.Windows.Forms.ComboBox();
+            this.BotComboBox_TypeUnitsVillage3 = new System.Windows.Forms.ComboBox();
+            this.BotComboBox_TypeUnitsVillage4 = new System.Windows.Forms.ComboBox();
+            this.BotComboBox_TypeUnitsVillage5 = new System.Windows.Forms.ComboBox();
+            this.BotComboBox_TypeUnitsVillage6 = new System.Windows.Forms.ComboBox();
             this.BotTabControl.SuspendLayout();
             this.BotTabPage_Overview.SuspendLayout();
             this.BotGroupBox_Status.SuspendLayout();
@@ -504,6 +528,12 @@
             this.BotGroupBox_TownSelectFarming.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.BotGroupBox_Villages.SuspendLayout();
+            this.GroupBox_typeresourceVillage6.SuspendLayout();
+            this.GroupBox_typeresourceVillage5.SuspendLayout();
+            this.GroupBox_typeresourceVillage4.SuspendLayout();
+            this.GroupBox_typeresourceVillage3.SuspendLayout();
+            this.GroupBox_typeresourceVillage2.SuspendLayout();
+            this.GroupBox_typeresourceVillage1.SuspendLayout();
             this.BotTabPage_Trading.SuspendLayout();
             this.BotGroupBox_Trading.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BotNumericUpDown_TradeRemainingIron)).BeginInit();
@@ -814,6 +844,17 @@
             this.BotTabPage_Queues.TabIndex = 7;
             this.BotTabPage_Queues.Text = "Queues";
             this.BotTabPage_Queues.UseVisualStyleBackColor = true;
+            // 
+            // BotButton_refreshQueues
+            // 
+            this.BotButton_refreshQueues.Enabled = false;
+            this.BotButton_refreshQueues.Location = new System.Drawing.Point(969, 685);
+            this.BotButton_refreshQueues.Name = "BotButton_refreshQueues";
+            this.BotButton_refreshQueues.Size = new System.Drawing.Size(75, 23);
+            this.BotButton_refreshQueues.TabIndex = 65;
+            this.BotButton_refreshQueues.Text = "Refresh";
+            this.BotButton_refreshQueues.UseVisualStyleBackColor = true;
+            this.BotButton_refreshQueues.Click += new System.EventHandler(this.BotButton_refreshQueues_Click);
             // 
             // BotGroupBox_UnitQueue
             // 
@@ -4111,7 +4152,7 @@
             this.BotGroupBox_TownSelectFarming.Controls.Add(this.BotButton_NextTownFarmers);
             this.BotGroupBox_TownSelectFarming.Controls.Add(this.BotButton_PrevTownFarmers);
             this.BotGroupBox_TownSelectFarming.Controls.Add(this.BotComboBox_TownListFarmers);
-            this.BotGroupBox_TownSelectFarming.Location = new System.Drawing.Point(3, 367);
+            this.BotGroupBox_TownSelectFarming.Location = new System.Drawing.Point(3, 432);
             this.BotGroupBox_TownSelectFarming.Name = "BotGroupBox_TownSelectFarming";
             this.BotGroupBox_TownSelectFarming.Size = new System.Drawing.Size(221, 82);
             this.BotGroupBox_TownSelectFarming.TabIndex = 61;
@@ -4155,7 +4196,7 @@
             this.groupBox4.Controls.Add(this.BotLabel_FarmersLootInterval);
             this.groupBox4.Controls.Add(this.BotButton_SaveFarmers);
             this.groupBox4.Controls.Add(this.BotCheckBox_FarmersLootEnabled);
-            this.groupBox4.Location = new System.Drawing.Point(474, 367);
+            this.groupBox4.Location = new System.Drawing.Point(474, 432);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(167, 105);
             this.groupBox4.TabIndex = 2;
@@ -4214,6 +4255,18 @@
             // 
             // BotGroupBox_Villages
             // 
+            this.BotGroupBox_Villages.Controls.Add(this.BotComboBox_TypeUnitsVillage6);
+            this.BotGroupBox_Villages.Controls.Add(this.BotComboBox_TypeUnitsVillage5);
+            this.BotGroupBox_Villages.Controls.Add(this.BotComboBox_TypeUnitsVillage4);
+            this.BotGroupBox_Villages.Controls.Add(this.BotComboBox_TypeUnitsVillage3);
+            this.BotGroupBox_Villages.Controls.Add(this.BotComboBox_TypeUnitsVillage2);
+            this.BotGroupBox_Villages.Controls.Add(this.BotComboBox_TypeUnitsVillage1);
+            this.BotGroupBox_Villages.Controls.Add(this.GroupBox_typeresourceVillage6);
+            this.BotGroupBox_Villages.Controls.Add(this.GroupBox_typeresourceVillage5);
+            this.BotGroupBox_Villages.Controls.Add(this.GroupBox_typeresourceVillage4);
+            this.BotGroupBox_Villages.Controls.Add(this.GroupBox_typeresourceVillage3);
+            this.BotGroupBox_Villages.Controls.Add(this.GroupBox_typeresourceVillage2);
+            this.BotGroupBox_Villages.Controls.Add(this.GroupBox_typeresourceVillage1);
             this.BotGroupBox_Villages.Controls.Add(this.BotLabel_TimerVillage3);
             this.BotGroupBox_Villages.Controls.Add(this.BotLabel_TimerVillage4);
             this.BotGroupBox_Villages.Controls.Add(this.BotLabel_TimerVillage5);
@@ -4246,15 +4299,219 @@
             this.BotGroupBox_Villages.Controls.Add(this.BotLabel_ImageVillage1);
             this.BotGroupBox_Villages.Location = new System.Drawing.Point(3, 3);
             this.BotGroupBox_Villages.Name = "BotGroupBox_Villages";
-            this.BotGroupBox_Villages.Size = new System.Drawing.Size(638, 338);
+            this.BotGroupBox_Villages.Size = new System.Drawing.Size(654, 423);
             this.BotGroupBox_Villages.TabIndex = 1;
             this.BotGroupBox_Villages.TabStop = false;
             this.BotGroupBox_Villages.Text = "Villages";
             // 
+            // GroupBox_typeresourceVillage6
+            // 
+            this.GroupBox_typeresourceVillage6.Controls.Add(this.BotCheckBox_UnitsEnabledVillage6);
+            this.GroupBox_typeresourceVillage6.Controls.Add(this.BotCheckBox_ResourcesEnabledVillage6);
+            this.GroupBox_typeresourceVillage6.Enabled = false;
+            this.GroupBox_typeresourceVillage6.Location = new System.Drawing.Point(460, 365);
+            this.GroupBox_typeresourceVillage6.Name = "GroupBox_typeresourceVillage6";
+            this.GroupBox_typeresourceVillage6.Size = new System.Drawing.Size(145, 43);
+            this.GroupBox_typeresourceVillage6.TabIndex = 31;
+            this.GroupBox_typeresourceVillage6.TabStop = false;
+            this.GroupBox_typeresourceVillage6.Text = "Claim";
+            // 
+            // BotCheckBox_UnitsEnabledVillage6
+            // 
+            this.BotCheckBox_UnitsEnabledVillage6.AutoSize = true;
+            this.BotCheckBox_UnitsEnabledVillage6.Location = new System.Drawing.Point(96, 19);
+            this.BotCheckBox_UnitsEnabledVillage6.Name = "BotCheckBox_UnitsEnabledVillage6";
+            this.BotCheckBox_UnitsEnabledVillage6.Size = new System.Drawing.Size(49, 17);
+            this.BotCheckBox_UnitsEnabledVillage6.TabIndex = 3;
+            this.BotCheckBox_UnitsEnabledVillage6.Text = "Units";
+            this.BotCheckBox_UnitsEnabledVillage6.UseVisualStyleBackColor = true;
+            // 
+            // BotCheckBox_ResourcesEnabledVillage6
+            // 
+            this.BotCheckBox_ResourcesEnabledVillage6.AutoSize = true;
+            this.BotCheckBox_ResourcesEnabledVillage6.Checked = true;
+            this.BotCheckBox_ResourcesEnabledVillage6.Location = new System.Drawing.Point(6, 19);
+            this.BotCheckBox_ResourcesEnabledVillage6.Name = "BotCheckBox_ResourcesEnabledVillage6";
+            this.BotCheckBox_ResourcesEnabledVillage6.Size = new System.Drawing.Size(76, 17);
+            this.BotCheckBox_ResourcesEnabledVillage6.TabIndex = 2;
+            this.BotCheckBox_ResourcesEnabledVillage6.TabStop = true;
+            this.BotCheckBox_ResourcesEnabledVillage6.Text = "Resources";
+            this.BotCheckBox_ResourcesEnabledVillage6.UseVisualStyleBackColor = true;
+            // 
+            // GroupBox_typeresourceVillage5
+            // 
+            this.GroupBox_typeresourceVillage5.Controls.Add(this.BotCheckBox_UnitsEnabledVillage5);
+            this.GroupBox_typeresourceVillage5.Controls.Add(this.BotCheckBox_ResourcesEnabledVillage5);
+            this.GroupBox_typeresourceVillage5.Enabled = false;
+            this.GroupBox_typeresourceVillage5.Location = new System.Drawing.Point(39, 365);
+            this.GroupBox_typeresourceVillage5.Name = "GroupBox_typeresourceVillage5";
+            this.GroupBox_typeresourceVillage5.Size = new System.Drawing.Size(145, 43);
+            this.GroupBox_typeresourceVillage5.TabIndex = 32;
+            this.GroupBox_typeresourceVillage5.TabStop = false;
+            this.GroupBox_typeresourceVillage5.Text = "Claim";
+            // 
+            // BotCheckBox_UnitsEnabledVillage5
+            // 
+            this.BotCheckBox_UnitsEnabledVillage5.AutoSize = true;
+            this.BotCheckBox_UnitsEnabledVillage5.Location = new System.Drawing.Point(96, 19);
+            this.BotCheckBox_UnitsEnabledVillage5.Name = "BotCheckBox_UnitsEnabledVillage5";
+            this.BotCheckBox_UnitsEnabledVillage5.Size = new System.Drawing.Size(49, 17);
+            this.BotCheckBox_UnitsEnabledVillage5.TabIndex = 3;
+            this.BotCheckBox_UnitsEnabledVillage5.Text = "Units";
+            this.BotCheckBox_UnitsEnabledVillage5.UseVisualStyleBackColor = true;
+            // 
+            // BotCheckBox_ResourcesEnabledVillage5
+            // 
+            this.BotCheckBox_ResourcesEnabledVillage5.AutoSize = true;
+            this.BotCheckBox_ResourcesEnabledVillage5.Checked = true;
+            this.BotCheckBox_ResourcesEnabledVillage5.Location = new System.Drawing.Point(6, 19);
+            this.BotCheckBox_ResourcesEnabledVillage5.Name = "BotCheckBox_ResourcesEnabledVillage5";
+            this.BotCheckBox_ResourcesEnabledVillage5.Size = new System.Drawing.Size(76, 17);
+            this.BotCheckBox_ResourcesEnabledVillage5.TabIndex = 2;
+            this.BotCheckBox_ResourcesEnabledVillage5.TabStop = true;
+            this.BotCheckBox_ResourcesEnabledVillage5.Text = "Resources";
+            this.BotCheckBox_ResourcesEnabledVillage5.UseVisualStyleBackColor = true;
+            // 
+            // GroupBox_typeresourceVillage4
+            // 
+            this.GroupBox_typeresourceVillage4.Controls.Add(this.BotCheckBox_UnitsEnabledVillage4);
+            this.GroupBox_typeresourceVillage4.Controls.Add(this.BotCheckBox_ResourcesEnabledVillage4);
+            this.GroupBox_typeresourceVillage4.Enabled = false;
+            this.GroupBox_typeresourceVillage4.Location = new System.Drawing.Point(460, 227);
+            this.GroupBox_typeresourceVillage4.Name = "GroupBox_typeresourceVillage4";
+            this.GroupBox_typeresourceVillage4.Size = new System.Drawing.Size(145, 43);
+            this.GroupBox_typeresourceVillage4.TabIndex = 31;
+            this.GroupBox_typeresourceVillage4.TabStop = false;
+            this.GroupBox_typeresourceVillage4.Text = "Claim";
+            // 
+            // BotCheckBox_UnitsEnabledVillage4
+            // 
+            this.BotCheckBox_UnitsEnabledVillage4.AutoSize = true;
+            this.BotCheckBox_UnitsEnabledVillage4.Location = new System.Drawing.Point(96, 19);
+            this.BotCheckBox_UnitsEnabledVillage4.Name = "BotCheckBox_UnitsEnabledVillage4";
+            this.BotCheckBox_UnitsEnabledVillage4.Size = new System.Drawing.Size(49, 17);
+            this.BotCheckBox_UnitsEnabledVillage4.TabIndex = 3;
+            this.BotCheckBox_UnitsEnabledVillage4.Text = "Units";
+            this.BotCheckBox_UnitsEnabledVillage4.UseVisualStyleBackColor = true;
+            // 
+            // BotCheckBox_ResourcesEnabledVillage4
+            // 
+            this.BotCheckBox_ResourcesEnabledVillage4.AutoSize = true;
+            this.BotCheckBox_ResourcesEnabledVillage4.Checked = true;
+            this.BotCheckBox_ResourcesEnabledVillage4.Location = new System.Drawing.Point(6, 19);
+            this.BotCheckBox_ResourcesEnabledVillage4.Name = "BotCheckBox_ResourcesEnabledVillage4";
+            this.BotCheckBox_ResourcesEnabledVillage4.Size = new System.Drawing.Size(76, 17);
+            this.BotCheckBox_ResourcesEnabledVillage4.TabIndex = 2;
+            this.BotCheckBox_ResourcesEnabledVillage4.TabStop = true;
+            this.BotCheckBox_ResourcesEnabledVillage4.Text = "Resources";
+            this.BotCheckBox_ResourcesEnabledVillage4.UseVisualStyleBackColor = true;
+            // 
+            // GroupBox_typeresourceVillage3
+            // 
+            this.GroupBox_typeresourceVillage3.Controls.Add(this.BotCheckBox_UnitsEnabledVillage3);
+            this.GroupBox_typeresourceVillage3.Controls.Add(this.BotCheckBox_ResourcesEnabledVillage3);
+            this.GroupBox_typeresourceVillage3.Enabled = false;
+            this.GroupBox_typeresourceVillage3.Location = new System.Drawing.Point(39, 219);
+            this.GroupBox_typeresourceVillage3.Name = "GroupBox_typeresourceVillage3";
+            this.GroupBox_typeresourceVillage3.Size = new System.Drawing.Size(145, 43);
+            this.GroupBox_typeresourceVillage3.TabIndex = 30;
+            this.GroupBox_typeresourceVillage3.TabStop = false;
+            this.GroupBox_typeresourceVillage3.Text = "Claim";
+            // 
+            // BotCheckBox_UnitsEnabledVillage3
+            // 
+            this.BotCheckBox_UnitsEnabledVillage3.AutoSize = true;
+            this.BotCheckBox_UnitsEnabledVillage3.Location = new System.Drawing.Point(96, 19);
+            this.BotCheckBox_UnitsEnabledVillage3.Name = "BotCheckBox_UnitsEnabledVillage3";
+            this.BotCheckBox_UnitsEnabledVillage3.Size = new System.Drawing.Size(49, 17);
+            this.BotCheckBox_UnitsEnabledVillage3.TabIndex = 3;
+            this.BotCheckBox_UnitsEnabledVillage3.Text = "Units";
+            this.BotCheckBox_UnitsEnabledVillage3.UseVisualStyleBackColor = true;
+            // 
+            // BotCheckBox_ResourcesEnabledVillage3
+            // 
+            this.BotCheckBox_ResourcesEnabledVillage3.AutoSize = true;
+            this.BotCheckBox_ResourcesEnabledVillage3.Checked = true;
+            this.BotCheckBox_ResourcesEnabledVillage3.Location = new System.Drawing.Point(6, 19);
+            this.BotCheckBox_ResourcesEnabledVillage3.Name = "BotCheckBox_ResourcesEnabledVillage3";
+            this.BotCheckBox_ResourcesEnabledVillage3.Size = new System.Drawing.Size(76, 17);
+            this.BotCheckBox_ResourcesEnabledVillage3.TabIndex = 2;
+            this.BotCheckBox_ResourcesEnabledVillage3.TabStop = true;
+            this.BotCheckBox_ResourcesEnabledVillage3.Text = "Resources";
+            this.BotCheckBox_ResourcesEnabledVillage3.UseVisualStyleBackColor = true;
+            // 
+            // GroupBox_typeresourceVillage2
+            // 
+            this.GroupBox_typeresourceVillage2.Controls.Add(this.BotCheckBox_UnitsEnabledVillage2);
+            this.GroupBox_typeresourceVillage2.Controls.Add(this.BotCheckBox_ResourcesEnabledVillage2);
+            this.GroupBox_typeresourceVillage2.Enabled = false;
+            this.GroupBox_typeresourceVillage2.Location = new System.Drawing.Point(460, 102);
+            this.GroupBox_typeresourceVillage2.Name = "GroupBox_typeresourceVillage2";
+            this.GroupBox_typeresourceVillage2.Size = new System.Drawing.Size(145, 43);
+            this.GroupBox_typeresourceVillage2.TabIndex = 29;
+            this.GroupBox_typeresourceVillage2.TabStop = false;
+            this.GroupBox_typeresourceVillage2.Text = "Claim";
+            // 
+            // BotCheckBox_UnitsEnabledVillage2
+            // 
+            this.BotCheckBox_UnitsEnabledVillage2.AutoSize = true;
+            this.BotCheckBox_UnitsEnabledVillage2.Location = new System.Drawing.Point(96, 19);
+            this.BotCheckBox_UnitsEnabledVillage2.Name = "BotCheckBox_UnitsEnabledVillage2";
+            this.BotCheckBox_UnitsEnabledVillage2.Size = new System.Drawing.Size(49, 17);
+            this.BotCheckBox_UnitsEnabledVillage2.TabIndex = 3;
+            this.BotCheckBox_UnitsEnabledVillage2.Text = "Units";
+            this.BotCheckBox_UnitsEnabledVillage2.UseVisualStyleBackColor = true;
+            // 
+            // BotCheckBox_ResourcesEnabledVillage2
+            // 
+            this.BotCheckBox_ResourcesEnabledVillage2.AutoSize = true;
+            this.BotCheckBox_ResourcesEnabledVillage2.Checked = true;
+            this.BotCheckBox_ResourcesEnabledVillage2.Location = new System.Drawing.Point(6, 19);
+            this.BotCheckBox_ResourcesEnabledVillage2.Name = "BotCheckBox_ResourcesEnabledVillage2";
+            this.BotCheckBox_ResourcesEnabledVillage2.Size = new System.Drawing.Size(76, 17);
+            this.BotCheckBox_ResourcesEnabledVillage2.TabIndex = 2;
+            this.BotCheckBox_ResourcesEnabledVillage2.TabStop = true;
+            this.BotCheckBox_ResourcesEnabledVillage2.Text = "Resources";
+            this.BotCheckBox_ResourcesEnabledVillage2.UseVisualStyleBackColor = true;
+            // 
+            // GroupBox_typeresourceVillage1
+            // 
+            this.GroupBox_typeresourceVillage1.Controls.Add(this.BotCheckBox_UnitsEnabledVillage1);
+            this.GroupBox_typeresourceVillage1.Controls.Add(this.BotCheckBox_ResourcesEnabledVillage1);
+            this.GroupBox_typeresourceVillage1.Enabled = false;
+            this.GroupBox_typeresourceVillage1.Location = new System.Drawing.Point(36, 102);
+            this.GroupBox_typeresourceVillage1.Name = "GroupBox_typeresourceVillage1";
+            this.GroupBox_typeresourceVillage1.Size = new System.Drawing.Size(147, 43);
+            this.GroupBox_typeresourceVillage1.TabIndex = 28;
+            this.GroupBox_typeresourceVillage1.TabStop = false;
+            this.GroupBox_typeresourceVillage1.Text = "Claim";
+            // 
+            // BotCheckBox_UnitsEnabledVillage1
+            // 
+            this.BotCheckBox_UnitsEnabledVillage1.AutoSize = true;
+            this.BotCheckBox_UnitsEnabledVillage1.Location = new System.Drawing.Point(96, 19);
+            this.BotCheckBox_UnitsEnabledVillage1.Name = "BotCheckBox_UnitsEnabledVillage1";
+            this.BotCheckBox_UnitsEnabledVillage1.Size = new System.Drawing.Size(49, 17);
+            this.BotCheckBox_UnitsEnabledVillage1.TabIndex = 1;
+            this.BotCheckBox_UnitsEnabledVillage1.Text = "Units";
+            this.BotCheckBox_UnitsEnabledVillage1.UseVisualStyleBackColor = true;
+            // 
+            // BotCheckBox_ResourcesEnabledVillage1
+            // 
+            this.BotCheckBox_ResourcesEnabledVillage1.AutoSize = true;
+            this.BotCheckBox_ResourcesEnabledVillage1.Checked = true;
+            this.BotCheckBox_ResourcesEnabledVillage1.Location = new System.Drawing.Point(6, 19);
+            this.BotCheckBox_ResourcesEnabledVillage1.Name = "BotCheckBox_ResourcesEnabledVillage1";
+            this.BotCheckBox_ResourcesEnabledVillage1.Size = new System.Drawing.Size(76, 17);
+            this.BotCheckBox_ResourcesEnabledVillage1.TabIndex = 0;
+            this.BotCheckBox_ResourcesEnabledVillage1.TabStop = true;
+            this.BotCheckBox_ResourcesEnabledVillage1.Text = "Resources";
+            this.BotCheckBox_ResourcesEnabledVillage1.UseVisualStyleBackColor = true;
+            // 
             // BotLabel_TimerVillage3
             // 
             this.BotLabel_TimerVillage3.AutoSize = true;
-            this.BotLabel_TimerVillage3.Location = new System.Drawing.Point(115, 165);
+            this.BotLabel_TimerVillage3.Location = new System.Drawing.Point(117, 188);
             this.BotLabel_TimerVillage3.Name = "BotLabel_TimerVillage3";
             this.BotLabel_TimerVillage3.Size = new System.Drawing.Size(69, 13);
             this.BotLabel_TimerVillage3.TabIndex = 27;
@@ -4263,7 +4520,7 @@
             // BotLabel_TimerVillage4
             // 
             this.BotLabel_TimerVillage4.AutoSize = true;
-            this.BotLabel_TimerVillage4.Location = new System.Drawing.Point(525, 165);
+            this.BotLabel_TimerVillage4.Location = new System.Drawing.Point(525, 188);
             this.BotLabel_TimerVillage4.Name = "BotLabel_TimerVillage4";
             this.BotLabel_TimerVillage4.Size = new System.Drawing.Size(69, 13);
             this.BotLabel_TimerVillage4.TabIndex = 26;
@@ -4272,7 +4529,7 @@
             // BotLabel_TimerVillage5
             // 
             this.BotLabel_TimerVillage5.AutoSize = true;
-            this.BotLabel_TimerVillage5.Location = new System.Drawing.Point(117, 281);
+            this.BotLabel_TimerVillage5.Location = new System.Drawing.Point(119, 329);
             this.BotLabel_TimerVillage5.Name = "BotLabel_TimerVillage5";
             this.BotLabel_TimerVillage5.Size = new System.Drawing.Size(69, 13);
             this.BotLabel_TimerVillage5.TabIndex = 25;
@@ -4281,7 +4538,7 @@
             // BotLabel_TimerVillage6
             // 
             this.BotLabel_TimerVillage6.AutoSize = true;
-            this.BotLabel_TimerVillage6.Location = new System.Drawing.Point(525, 281);
+            this.BotLabel_TimerVillage6.Location = new System.Drawing.Point(525, 329);
             this.BotLabel_TimerVillage6.Name = "BotLabel_TimerVillage6";
             this.BotLabel_TimerVillage6.Size = new System.Drawing.Size(69, 13);
             this.BotLabel_TimerVillage6.TabIndex = 24;
@@ -4317,7 +4574,7 @@
             // BotLabel_VillageLimit5
             // 
             this.BotLabel_VillageLimit5.AutoSize = true;
-            this.BotLabel_VillageLimit5.Location = new System.Drawing.Point(115, 265);
+            this.BotLabel_VillageLimit5.Location = new System.Drawing.Point(117, 313);
             this.BotLabel_VillageLimit5.Name = "BotLabel_VillageLimit5";
             this.BotLabel_VillageLimit5.Size = new System.Drawing.Size(30, 13);
             this.BotLabel_VillageLimit5.TabIndex = 21;
@@ -4326,7 +4583,7 @@
             // BotLabel_VillageLimit4
             // 
             this.BotLabel_VillageLimit4.AutoSize = true;
-            this.BotLabel_VillageLimit4.Location = new System.Drawing.Point(525, 148);
+            this.BotLabel_VillageLimit4.Location = new System.Drawing.Point(525, 171);
             this.BotLabel_VillageLimit4.Name = "BotLabel_VillageLimit4";
             this.BotLabel_VillageLimit4.Size = new System.Drawing.Size(30, 13);
             this.BotLabel_VillageLimit4.TabIndex = 20;
@@ -4335,7 +4592,7 @@
             // BotLabel_VillageLimit6
             // 
             this.BotLabel_VillageLimit6.AutoSize = true;
-            this.BotLabel_VillageLimit6.Location = new System.Drawing.Point(525, 265);
+            this.BotLabel_VillageLimit6.Location = new System.Drawing.Point(525, 313);
             this.BotLabel_VillageLimit6.Name = "BotLabel_VillageLimit6";
             this.BotLabel_VillageLimit6.Size = new System.Drawing.Size(30, 13);
             this.BotLabel_VillageLimit6.TabIndex = 19;
@@ -4344,7 +4601,7 @@
             // BotLabel_VillageLimit3
             // 
             this.BotLabel_VillageLimit3.AutoSize = true;
-            this.BotLabel_VillageLimit3.Location = new System.Drawing.Point(115, 148);
+            this.BotLabel_VillageLimit3.Location = new System.Drawing.Point(117, 171);
             this.BotLabel_VillageLimit3.Name = "BotLabel_VillageLimit3";
             this.BotLabel_VillageLimit3.Size = new System.Drawing.Size(30, 13);
             this.BotLabel_VillageLimit3.TabIndex = 18;
@@ -4362,7 +4619,7 @@
             // BotLabel_VillageName6
             // 
             this.BotLabel_VillageName6.AutoSize = true;
-            this.BotLabel_VillageName6.Location = new System.Drawing.Point(525, 241);
+            this.BotLabel_VillageName6.Location = new System.Drawing.Point(525, 289);
             this.BotLabel_VillageName6.Name = "BotLabel_VillageName6";
             this.BotLabel_VillageName6.Size = new System.Drawing.Size(52, 13);
             this.BotLabel_VillageName6.TabIndex = 17;
@@ -4371,7 +4628,7 @@
             // BotLabel_VillageName5
             // 
             this.BotLabel_VillageName5.AutoSize = true;
-            this.BotLabel_VillageName5.Location = new System.Drawing.Point(115, 241);
+            this.BotLabel_VillageName5.Location = new System.Drawing.Point(117, 289);
             this.BotLabel_VillageName5.Name = "BotLabel_VillageName5";
             this.BotLabel_VillageName5.Size = new System.Drawing.Size(52, 13);
             this.BotLabel_VillageName5.TabIndex = 16;
@@ -4380,7 +4637,7 @@
             // BotLabel_VillageName4
             // 
             this.BotLabel_VillageName4.AutoSize = true;
-            this.BotLabel_VillageName4.Location = new System.Drawing.Point(525, 125);
+            this.BotLabel_VillageName4.Location = new System.Drawing.Point(525, 148);
             this.BotLabel_VillageName4.Name = "BotLabel_VillageName4";
             this.BotLabel_VillageName4.Size = new System.Drawing.Size(52, 13);
             this.BotLabel_VillageName4.TabIndex = 15;
@@ -4389,7 +4646,7 @@
             // BotLabel_VillageName3
             // 
             this.BotLabel_VillageName3.AutoSize = true;
-            this.BotLabel_VillageName3.Location = new System.Drawing.Point(115, 125);
+            this.BotLabel_VillageName3.Location = new System.Drawing.Point(117, 148);
             this.BotLabel_VillageName3.Name = "BotLabel_VillageName3";
             this.BotLabel_VillageName3.Size = new System.Drawing.Size(52, 13);
             this.BotLabel_VillageName3.TabIndex = 14;
@@ -4417,7 +4674,7 @@
             // 
             this.BotCheckBox_Village6.AutoSize = true;
             this.BotCheckBox_Village6.Enabled = false;
-            this.BotCheckBox_Village6.Location = new System.Drawing.Point(528, 297);
+            this.BotCheckBox_Village6.Location = new System.Drawing.Point(528, 345);
             this.BotCheckBox_Village6.Name = "BotCheckBox_Village6";
             this.BotCheckBox_Village6.Size = new System.Drawing.Size(65, 17);
             this.BotCheckBox_Village6.TabIndex = 11;
@@ -4428,7 +4685,7 @@
             // 
             this.BotCheckBox_Village4.AutoSize = true;
             this.BotCheckBox_Village4.Enabled = false;
-            this.BotCheckBox_Village4.Location = new System.Drawing.Point(528, 181);
+            this.BotCheckBox_Village4.Location = new System.Drawing.Point(528, 204);
             this.BotCheckBox_Village4.Name = "BotCheckBox_Village4";
             this.BotCheckBox_Village4.Size = new System.Drawing.Size(65, 17);
             this.BotCheckBox_Village4.TabIndex = 10;
@@ -4439,7 +4696,7 @@
             // 
             this.BotCheckBox_Village5.AutoSize = true;
             this.BotCheckBox_Village5.Enabled = false;
-            this.BotCheckBox_Village5.Location = new System.Drawing.Point(118, 297);
+            this.BotCheckBox_Village5.Location = new System.Drawing.Point(120, 345);
             this.BotCheckBox_Village5.Name = "BotCheckBox_Village5";
             this.BotCheckBox_Village5.Size = new System.Drawing.Size(65, 17);
             this.BotCheckBox_Village5.TabIndex = 9;
@@ -4450,7 +4707,7 @@
             // 
             this.BotCheckBox_Village3.AutoSize = true;
             this.BotCheckBox_Village3.Enabled = false;
-            this.BotCheckBox_Village3.Location = new System.Drawing.Point(118, 181);
+            this.BotCheckBox_Village3.Location = new System.Drawing.Point(120, 204);
             this.BotCheckBox_Village3.Name = "BotCheckBox_Village3";
             this.BotCheckBox_Village3.Size = new System.Drawing.Size(65, 17);
             this.BotCheckBox_Village3.TabIndex = 8;
@@ -4482,7 +4739,7 @@
             // BotLabel_ImageVillage5
             // 
             this.BotLabel_ImageVillage5.Image = ((System.Drawing.Image)(resources.GetObject("BotLabel_ImageVillage5.Image")));
-            this.BotLabel_ImageVillage5.Location = new System.Drawing.Point(16, 241);
+            this.BotLabel_ImageVillage5.Location = new System.Drawing.Point(18, 289);
             this.BotLabel_ImageVillage5.Name = "BotLabel_ImageVillage5";
             this.BotLabel_ImageVillage5.Size = new System.Drawing.Size(76, 73);
             this.BotLabel_ImageVillage5.TabIndex = 5;
@@ -4490,7 +4747,7 @@
             // BotLabel_ImageVillage6
             // 
             this.BotLabel_ImageVillage6.Image = ((System.Drawing.Image)(resources.GetObject("BotLabel_ImageVillage6.Image")));
-            this.BotLabel_ImageVillage6.Location = new System.Drawing.Point(429, 241);
+            this.BotLabel_ImageVillage6.Location = new System.Drawing.Point(429, 289);
             this.BotLabel_ImageVillage6.Name = "BotLabel_ImageVillage6";
             this.BotLabel_ImageVillage6.Size = new System.Drawing.Size(76, 73);
             this.BotLabel_ImageVillage6.TabIndex = 4;
@@ -4498,7 +4755,7 @@
             // BotLabel_ImageVillage4
             // 
             this.BotLabel_ImageVillage4.Image = ((System.Drawing.Image)(resources.GetObject("BotLabel_ImageVillage4.Image")));
-            this.BotLabel_ImageVillage4.Location = new System.Drawing.Point(429, 125);
+            this.BotLabel_ImageVillage4.Location = new System.Drawing.Point(429, 148);
             this.BotLabel_ImageVillage4.Name = "BotLabel_ImageVillage4";
             this.BotLabel_ImageVillage4.Size = new System.Drawing.Size(76, 73);
             this.BotLabel_ImageVillage4.TabIndex = 3;
@@ -4506,7 +4763,7 @@
             // BotLabel_ImageVillage3
             // 
             this.BotLabel_ImageVillage3.Image = ((System.Drawing.Image)(resources.GetObject("BotLabel_ImageVillage3.Image")));
-            this.BotLabel_ImageVillage3.Location = new System.Drawing.Point(16, 125);
+            this.BotLabel_ImageVillage3.Location = new System.Drawing.Point(18, 148);
             this.BotLabel_ImageVillage3.Name = "BotLabel_ImageVillage3";
             this.BotLabel_ImageVillage3.Size = new System.Drawing.Size(76, 73);
             this.BotLabel_ImageVillage3.TabIndex = 2;
@@ -6025,16 +6282,89 @@
             this.BotTextBox_World.TabIndex = 3;
             this.BotTextBox_World.Text = "en1";
             // 
-            // BotButton_refreshQueues
+            // BotComboBox_TypeUnitsVillage1
             // 
-            this.BotButton_refreshQueues.Enabled = false;
-            this.BotButton_refreshQueues.Location = new System.Drawing.Point(969, 685);
-            this.BotButton_refreshQueues.Name = "BotButton_refreshQueues";
-            this.BotButton_refreshQueues.Size = new System.Drawing.Size(75, 23);
-            this.BotButton_refreshQueues.TabIndex = 65;
-            this.BotButton_refreshQueues.Text = "Refresh";
-            this.BotButton_refreshQueues.UseVisualStyleBackColor = true;
-            this.BotButton_refreshQueues.Click += new System.EventHandler(this.BotButton_refreshQueues_Click);
+            this.BotComboBox_TypeUnitsVillage1.Enabled = false;
+            this.BotComboBox_TypeUnitsVillage1.FormattingEnabled = true;
+            this.BotComboBox_TypeUnitsVillage1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.BotComboBox_TypeUnitsVillage1.Location = new System.Drawing.Point(199, 117);
+            this.BotComboBox_TypeUnitsVillage1.Name = "BotComboBox_TypeUnitsVillage1";
+            this.BotComboBox_TypeUnitsVillage1.Size = new System.Drawing.Size(33, 21);
+            this.BotComboBox_TypeUnitsVillage1.TabIndex = 33;
+            // 
+            // BotComboBox_TypeUnitsVillage2
+            // 
+            this.BotComboBox_TypeUnitsVillage2.Enabled = false;
+            this.BotComboBox_TypeUnitsVillage2.FormattingEnabled = true;
+            this.BotComboBox_TypeUnitsVillage2.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.BotComboBox_TypeUnitsVillage2.Location = new System.Drawing.Point(611, 120);
+            this.BotComboBox_TypeUnitsVillage2.Name = "BotComboBox_TypeUnitsVillage2";
+            this.BotComboBox_TypeUnitsVillage2.Size = new System.Drawing.Size(33, 21);
+            this.BotComboBox_TypeUnitsVillage2.TabIndex = 34;
+            // 
+            // BotComboBox_TypeUnitsVillage3
+            // 
+            this.BotComboBox_TypeUnitsVillage3.Enabled = false;
+            this.BotComboBox_TypeUnitsVillage3.FormattingEnabled = true;
+            this.BotComboBox_TypeUnitsVillage3.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.BotComboBox_TypeUnitsVillage3.Location = new System.Drawing.Point(199, 234);
+            this.BotComboBox_TypeUnitsVillage3.Name = "BotComboBox_TypeUnitsVillage3";
+            this.BotComboBox_TypeUnitsVillage3.Size = new System.Drawing.Size(33, 21);
+            this.BotComboBox_TypeUnitsVillage3.TabIndex = 35;
+            // 
+            // BotComboBox_TypeUnitsVillage4
+            // 
+            this.BotComboBox_TypeUnitsVillage4.Enabled = false;
+            this.BotComboBox_TypeUnitsVillage4.FormattingEnabled = true;
+            this.BotComboBox_TypeUnitsVillage4.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.BotComboBox_TypeUnitsVillage4.Location = new System.Drawing.Point(611, 238);
+            this.BotComboBox_TypeUnitsVillage4.Name = "BotComboBox_TypeUnitsVillage4";
+            this.BotComboBox_TypeUnitsVillage4.Size = new System.Drawing.Size(33, 21);
+            this.BotComboBox_TypeUnitsVillage4.TabIndex = 36;
+            // 
+            // BotComboBox_TypeUnitsVillage5
+            // 
+            this.BotComboBox_TypeUnitsVillage5.Enabled = false;
+            this.BotComboBox_TypeUnitsVillage5.FormattingEnabled = true;
+            this.BotComboBox_TypeUnitsVillage5.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.BotComboBox_TypeUnitsVillage5.Location = new System.Drawing.Point(199, 380);
+            this.BotComboBox_TypeUnitsVillage5.Name = "BotComboBox_TypeUnitsVillage5";
+            this.BotComboBox_TypeUnitsVillage5.Size = new System.Drawing.Size(33, 21);
+            this.BotComboBox_TypeUnitsVillage5.TabIndex = 37;
+            // 
+            // BotComboBox_TypeUnitsVillage6
+            // 
+            this.BotComboBox_TypeUnitsVillage6.Enabled = false;
+            this.BotComboBox_TypeUnitsVillage6.FormattingEnabled = true;
+            this.BotComboBox_TypeUnitsVillage6.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4"});
+            this.BotComboBox_TypeUnitsVillage6.Location = new System.Drawing.Point(611, 380);
+            this.BotComboBox_TypeUnitsVillage6.Name = "BotComboBox_TypeUnitsVillage6";
+            this.BotComboBox_TypeUnitsVillage6.Size = new System.Drawing.Size(33, 21);
+            this.BotComboBox_TypeUnitsVillage6.TabIndex = 38;
             // 
             // MainForm
             // 
@@ -6129,6 +6459,18 @@
             this.groupBox4.PerformLayout();
             this.BotGroupBox_Villages.ResumeLayout(false);
             this.BotGroupBox_Villages.PerformLayout();
+            this.GroupBox_typeresourceVillage6.ResumeLayout(false);
+            this.GroupBox_typeresourceVillage6.PerformLayout();
+            this.GroupBox_typeresourceVillage5.ResumeLayout(false);
+            this.GroupBox_typeresourceVillage5.PerformLayout();
+            this.GroupBox_typeresourceVillage4.ResumeLayout(false);
+            this.GroupBox_typeresourceVillage4.PerformLayout();
+            this.GroupBox_typeresourceVillage3.ResumeLayout(false);
+            this.GroupBox_typeresourceVillage3.PerformLayout();
+            this.GroupBox_typeresourceVillage2.ResumeLayout(false);
+            this.GroupBox_typeresourceVillage2.PerformLayout();
+            this.GroupBox_typeresourceVillage1.ResumeLayout(false);
+            this.GroupBox_typeresourceVillage1.PerformLayout();
             this.BotTabPage_Trading.ResumeLayout(false);
             this.BotGroupBox_Trading.ResumeLayout(false);
             this.BotGroupBox_Trading.PerformLayout();
@@ -6595,5 +6937,29 @@
         private System.Windows.Forms.NumericUpDown BotNumericUpDown_SkipUnitQueuePop;
         private System.Windows.Forms.Label Label_TownPriority;
         private System.Windows.Forms.Button BotButton_refreshQueues;
+        private System.Windows.Forms.GroupBox GroupBox_typeresourceVillage2;
+        private System.Windows.Forms.GroupBox GroupBox_typeresourceVillage1;
+        private System.Windows.Forms.RadioButton BotCheckBox_UnitsEnabledVillage1;
+        private System.Windows.Forms.RadioButton BotCheckBox_ResourcesEnabledVillage1;
+        private System.Windows.Forms.RadioButton BotCheckBox_ResourcesEnabledVillage2;
+        private System.Windows.Forms.GroupBox GroupBox_typeresourceVillage6;
+        private System.Windows.Forms.RadioButton BotCheckBox_UnitsEnabledVillage6;
+        private System.Windows.Forms.RadioButton BotCheckBox_ResourcesEnabledVillage6;
+        private System.Windows.Forms.GroupBox GroupBox_typeresourceVillage5;
+        private System.Windows.Forms.RadioButton BotCheckBox_UnitsEnabledVillage5;
+        private System.Windows.Forms.RadioButton BotCheckBox_ResourcesEnabledVillage5;
+        private System.Windows.Forms.GroupBox GroupBox_typeresourceVillage4;
+        private System.Windows.Forms.RadioButton BotCheckBox_UnitsEnabledVillage4;
+        private System.Windows.Forms.RadioButton BotCheckBox_ResourcesEnabledVillage4;
+        private System.Windows.Forms.GroupBox GroupBox_typeresourceVillage3;
+        private System.Windows.Forms.RadioButton BotCheckBox_UnitsEnabledVillage3;
+        private System.Windows.Forms.RadioButton BotCheckBox_ResourcesEnabledVillage3;
+        private System.Windows.Forms.RadioButton BotCheckBox_UnitsEnabledVillage2;
+        private System.Windows.Forms.ComboBox BotComboBox_TypeUnitsVillage1;
+        private System.Windows.Forms.ComboBox BotComboBox_TypeUnitsVillage6;
+        private System.Windows.Forms.ComboBox BotComboBox_TypeUnitsVillage5;
+        private System.Windows.Forms.ComboBox BotComboBox_TypeUnitsVillage4;
+        private System.Windows.Forms.ComboBox BotComboBox_TypeUnitsVillage3;
+        private System.Windows.Forms.ComboBox BotComboBox_TypeUnitsVillage2;
     }
 }

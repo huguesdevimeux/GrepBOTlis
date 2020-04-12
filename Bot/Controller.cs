@@ -711,6 +711,7 @@ namespace Bot
                 case ControllerStates.SwitchTown:
                     SwitchTownRequest();
                     break;
+
                 //Farmer
                 case ControllerStates.LocateFarmers:
                     LocateFarmersRequest();
@@ -727,6 +728,11 @@ namespace Bot
                 case ControllerStates.LootFarmer:
                     LootFarmerRequest();
                     break;
+
+                case ControllerStates.UnitsFarmer:
+                    UnitsFarmerRequest();
+                    break; 
+
                 //Trade
                 case ControllerStates.CheckTrade:
                     CheckTradeRequest();
@@ -937,7 +943,7 @@ namespace Bot
                             m_Town.TownID + "&action=get_chunks&h=" + H + "&json=" + l_Json + "&_=" +
                             ExpandedServerTime;
                 GetRequest(new Uri(l_Url));
-                CallLogEvent(m_Town.TownName + ": Locating Farmers.");
+                CallLogEvent(m_Town.TownName + ": [FARM] Locating Farmers.");
             }
             catch (Exception ex)
             {
@@ -965,7 +971,7 @@ namespace Bot
                 var l_Url = "https://" + Settings.GrepolisWorldServer + "/game/frontend_bridge?town_id=" + m_CurrentTownID +
                             "&action=fetch&h=" + H + "&json=" + l_Json + "&_=" + ExpandedServerTime;
                 GetRequest(new Uri(l_Url));
-                CallLogEvent(m_Town.TownName + ": Demanding resources from " + l_Farmer.Name + ".");
+                CallLogEvent(m_Town.TownName + ": [FARM] Checking " + l_Farmer.Name + ".");
             }
             catch (Exception ex)
             {
@@ -1003,6 +1009,7 @@ namespace Bot
             try
             {
                 //{"model_url":"FarmTownPlayerRelation/24886","action_name":"claim","arguments":{"farm_town_id":1323,"type":"resources","option":1},"town_id":5108,"nl_init":true}
+                // 
                 var l_Farmer = m_Town.Farmers.Single(x => x.ID == m_ControllerQueueDataQueue.First()["farmid"]);
                 var l_Url = "https://" + Settings.GrepolisWorldServer + "/game/frontend_bridge?town_id=" + m_CurrentTownID +
                             "&action=execute&h=" + H;
@@ -1010,6 +1017,23 @@ namespace Bot
                              "\",\"action_name\":\"claim\",\"arguments\":{\"farm_town_id\":" + l_Farmer.ID +
                              ",\"type\":\"resources\",\"option\":" + m_ControllerQueueDataQueue.First()["option"] + "},\"town_id\":" + m_CurrentTownID + ",\"nl_init\":true}"} });
                 //CallLogEvent("Demanding resources from " + l_Farmer.Name + "(3)");
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteExceptionToLog(ex.Message);
+            }
+        }
+
+        private void UnitsFarmerRequest()
+        {
+            try
+            {
+                var l_Farmer = m_Town.Farmers.Single(x => x.ID == m_ControllerQueueDataQueue.First()["farmid"]);
+                var l_Url = "https://" + Settings.GrepolisWorldServer + "/game/frontend_bridge?town_id=" + m_CurrentTownID +
+                            "&action=execute&h=" + H;
+                PostRequest(new Uri(l_Url), new NameValueCollection() { {"json", "{\"model_url\":\"FarmTownPlayerRelation/" + l_Farmer.BattlePointsFarmID +
+                             "\",\"action_name\":\"claim\",\"arguments\":{\"farm_town_id\":" + l_Farmer.ID +
+                             ",\"type\":\"units\",\"option\":" + m_ControllerQueueDataQueue.First()["option"] + "},\"town_id\":" + m_CurrentTownID + ",\"nl_init\":true}"} });
             }
             catch (Exception ex)
             {
@@ -1056,7 +1080,7 @@ namespace Bot
                 //if no town found
                 if (l_TargetTown == null)
                 {
-                    CallLogEvent(m_Town.TownName + ": No towns for trading found.");
+                    CallLogEvent(m_Town.TownName + ": [TRADE] No towns for trading found.");
                     m_ControllerQueue.RemoveFirst();
                     m_RequestTimer.Start();
                     return;
@@ -1073,7 +1097,7 @@ namespace Bot
                 var l_Url = "https://" + Settings.GrepolisWorldServer + "/game/town_info?town_id=" + m_CurrentTownID +
                             "&action=trading&h=" + H + "&json=" + l_Json + "&_=" + ExpandedServerTime;
                 GetRequest(new Uri(l_Url));
-                CallLogEvent(m_Town.TownName + ": Starting trade between " + m_Town.TownName + " and " + l_TargetTown.TownName + ".");
+                CallLogEvent(m_Town.TownName + ": [TRADE] Starting trade between " + m_Town.TownName + " and " + l_TargetTown.TownName + ".");
             }
             catch (Exception ex)
             {
@@ -1292,9 +1316,9 @@ namespace Bot
             try
             {
                 //Building for town enabled?
-                if (!m_Town.BuildingQueueEnabled)
+                if (!m_Town.BuildingQueueEnabled && !m_Town.BuildingTargetEnabled)
                 {
-                    CallLogEvent(m_Town.TownName + ": [BUILD] Building queue is disabled.");
+                    CallLogEvent(m_Town.TownName + ": [BUILD] Building actions are disabled.");
                     m_ControllerQueue.RemoveFirst();
                     m_RequestTimer.Start();
                     return;
@@ -1442,7 +1466,6 @@ namespace Bot
                     m_RequestTimer.Start();
                     return;
                 }
-
                 CallLogEvent(m_Town.TownName + ": [BUILD] Adding " + l_Building + " to ingame queue.");
 
                 var l_Url = "https://" + Settings.GrepolisWorldServer + "/game/frontend_bridge?town_id=" +
@@ -1875,6 +1898,10 @@ namespace Bot
 
                 case ControllerStates.LootFarmer:
                     LootFarmerResponse(p_Response);
+                    break;
+
+                case ControllerStates.UnitsFarmer:
+                    UnitsFarmerResponse(p_Response);
                     break;
 
                 case ControllerStates.CheckTrade:
@@ -3453,15 +3480,45 @@ namespace Bot
                 //Decide if something to loot
                 foreach (var l_Farmer in m_Town.Farmers)
                 {
-                    if (l_Farmer.Lootable && !m_Town.StorageFull && l_Farmer.Enabled && m_Town.LootEnabled)
+                    if (l_Farmer.Enabled && m_Town.LootEnabled)
                     {
-                        //Add looting request in reverse order
-                        m_ControllerQueue.AddFirst(ControllerStates.LootFarmer);
+                        if (l_Farmer.Lootable)
+                        {
+                            //Add looting request in reverse order
+                            if (l_Farmer.ResourcesEnabled)
+                            {
+                                if (!m_Town.StorageFull)
+                                {
+                                    m_ControllerQueue.AddFirst(ControllerStates.LootFarmer);
+                                    m_ControllerQueue.AddFirst(ControllerStates.GetTownSpecificData);
+                                    m_ControllerQueueDataQueue.AddFirst(new Dictionary<string, string>() { { "farmid", l_Farmer.ID }, { "option", m_Town.LootIntervalOption } }); //how much to loot. Option stands for the interval. 
+                                    m_ControllerQueue.AddFirst(ControllerStates.OpenFarmerWindow);
+                                }
+                                else
+                                {
+                                    CallLogEvent(m_Town.TownName + ": [FARM] Storage is full. Can't claim to farmers !");
+                                }
+                            }
+                            else if (l_Farmer.UnitsEnabled)
+                            {
 
-                        m_ControllerQueue.AddFirst(ControllerStates.GetTownSpecificData);
-
-                        m_ControllerQueueDataQueue.AddFirst(new Dictionary<string, string>() { { "farmid", l_Farmer.ID }, { "option", m_Town.LootIntervalOption } }); //how much to loot
-                        m_ControllerQueue.AddFirst(ControllerStates.OpenFarmerWindow);
+                                if (m_Town.PopulationAvailable > 20) // To change. We should know if we have enough population TODO
+                                {
+                                    m_ControllerQueue.AddFirst(ControllerStates.UnitsFarmer);
+                                    m_ControllerQueue.AddFirst(ControllerStates.GetTownSpecificData);
+                                    m_ControllerQueueDataQueue.AddFirst(new Dictionary<string, string>() { { "farmid", l_Farmer.ID }, { "option", l_Farmer.TypeUnits } }); //option here stands for the type of unit 
+                                    m_ControllerQueue.AddFirst(ControllerStates.OpenFarmerWindow);
+                                }
+                                else
+                                {
+                                    CallLogEvent(m_Town.TownName + ": [FARM] Not enough population !. Can't claim to farmers !");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            CallLogEvent(m_Town.TownName + ": [FARM] " + l_Farmer.Name + " is not lootable at the moment.");
+                        }
                     }
                 }
             }
@@ -3513,6 +3570,7 @@ namespace Bot
         {
             try
             {
+                
                 var l_Farmer = m_Town.Farmers.Single(x => x.ID == m_ControllerQueueDataQueue.First()["farmid"]);
 
                 //FarmTownPlayerRelations
@@ -3537,7 +3595,47 @@ namespace Bot
 
                 UpdateTownDataFromNotification(p_Response);
 
-                CallLogEvent(m_Town.TownName + ": Successful demanded resources from " + l_Farmer.Name + ".");
+                CallLogEvent(m_Town.TownName + ": [FARM] Successful demanded resources from " + l_Farmer.Name + ".");
+                //Remove data for requests
+                m_ControllerQueueDataQueue.RemoveFirst();
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteExceptionToLog(ex.Message);
+            }
+        }
+        /// <summary>
+        /// Handle the server response for LootFarmerRequest().
+        /// </summary>
+        private void UnitsFarmerResponse(string p_Response)
+        {
+            try
+            {
+                var l_Farmer = m_Town.Farmers.Single(x => x.ID == m_ControllerQueueDataQueue.First()["farmid"]);
+
+                //FarmTownPlayerRelations
+                var l_Search = "\\\"FarmTownPlayerRelation\\\"";
+                var l_Index = p_Response.IndexOf(l_Search, StringComparison.Ordinal);
+                var l_IndexStart = l_Index;
+
+                l_Search = "\\\"lootable_at\\\":";
+                l_Index = p_Response.IndexOf(l_Search, l_IndexStart, StringComparison.Ordinal);
+                var l_LootableAt = p_Response.Substring(l_Index + l_Search.Length,
+                        p_Response.IndexOf(",", l_Index + l_Search.Length, StringComparison.Ordinal) -
+                        (l_Index + l_Search.Length));
+
+                l_Search = "\\\"loot\\\":";
+                l_Index = p_Response.IndexOf(l_Search, l_IndexStart, StringComparison.Ordinal);
+                var l_Loot = int.Parse(p_Response.Substring(l_Index + l_Search.Length,
+                        p_Response.IndexOf(",", l_Index + l_Search.Length, StringComparison.Ordinal) -
+                        (l_Index + l_Search.Length)));
+
+                l_Farmer.LootedResources = l_Loot;
+                l_Farmer.LootTimer = l_LootableAt;
+
+                UpdateTownDataFromNotification(p_Response);
+
+                CallLogEvent(m_Town.TownName + ": [FARM] Successfully claimed units of type " + l_Farmer.TypeUnits + "from " + l_Farmer.Name + ".");
                 //Remove data for requests
                 m_ControllerQueueDataQueue.RemoveFirst();
             }
@@ -3957,7 +4055,7 @@ namespace Bot
 
                 if (m_Town.IsBuildingOrderQueueFull)
                 {
-                    CallLogEvent(m_Town.TownName + ": Building queue is full.");
+                    CallLogEvent(m_Town.TownName + ": [BUILD] Building queue is full.");
                     return;
                 }
 
